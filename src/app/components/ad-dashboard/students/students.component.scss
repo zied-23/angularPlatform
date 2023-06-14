@@ -1,0 +1,114 @@
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.students-table th,
+.students-table td {
+  padding: 8px;
+}
+
+.students-table th {
+  background-color: #f2f2f2;
+}
+
+.students-table td input[type="checkbox"] {
+  vertical-align: middle;
+}
+
+.students-table .update-button,
+.students-table .confirm-button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.students-table .update-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.students-table .confirm-button {
+  background-color: #2196f3;
+  color: white;
+}
+
+.status-select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 120px;
+}
+
+.student-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .students-table th,
+  .students-table td {
+    padding: 6px;
+  }
+
+  .students-table .update-button,
+  .students-table .confirm-button {
+    margin-left: 4px;
+    padding: 2px 6px;
+  }
+
+  .status-select {
+    padding: 6px;
+    font-size: 12px;
+    width: 100px;
+  }
+
+  .student-form {
+    max-width: 300px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 8px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+}

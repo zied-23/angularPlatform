@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  height: 100%;
+}
+.groups-list {
+  align-items: center;
+  text-align: center;
+  width: 40%;
+  background: #ffffff;
+}
+.messages {
+  width: 70%;
+  height: 100%;
+  margin-bottom: 10px;
+
+  background: #f6f7fb;
+}
+.searchbar {
+  height: 60px;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 36px;
+  padding: 10px;
+}
+.search_input {
+  color: #bebebe;
+  border: 0;
+  outline: 0;
+  background: none;
+  padding: 0 10px;
+  caret-color: transparent;
+  line-height: 40px;
+  transition: width 0.4s linear;
+  width: 320px;
+}
+.searchbar:hover > .search_input {
+  padding: 0 10px;
+  width: 320px;
+  caret-color: red;
+}
+.searchbar:hover > .search_icon {
+  background: white;
+  color: #e74c3c;
+}
+.search_icon {
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+}
+#history {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 400px;
+  height: 60%;
+  overflow-y: scroll;
+}
+
+#message {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+
+.fw {
+  width: 100%;
+}
+
+.mb {
+  margin-bottom: 1em;
+}

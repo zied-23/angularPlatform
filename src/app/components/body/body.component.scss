@@ -1,0 +1,42 @@
+.body {
+  margin-left: 6.688rem;
+  padding: 1px 10px;
+  height: 100vh;
+
+  margin: 0;
+}
+
+.body-trimmed {
+  margin-left: 23rem;
+}
+
+.body-md-screen {
+  margin-left: 6.688rem;
+}
+
+.body-full-screen {
+  margin-left: 6.688rem;
+}
+
+.body-default {
+  margin-left: 6.688rem;
+}
+
+@media (max-width: 768px) {
+  .body,
+  .body-trimmed,
+  .body-md-screen,
+  .body-full-screen,
+  .body-default {
+    margin-left: 6.688rem;
+  }
+}
+@media (max-width: 480px) {
+  .body,
+  .body-trimmed,
+  .body-md-screen,
+  .body-full-screen,
+  .body-default {
+    margin-left: 1rem;
+  }
+}

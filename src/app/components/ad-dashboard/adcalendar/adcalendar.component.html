@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="details">
+    <button class="add-button" (click)="openSessionDialog()">
+      <mat-icon>add</mat-icon>Add Session
+    </button>
+    <p *ngIf="selectedDay">{{ selectedDay }} {{ currentMonth }}</p>
+    <p *ngIf="!selectedDay">No date selected</p>
+    <div *ngIf="sessionGroups && sessionGroups.length > 0">
+      <h4>Session Groups:</h4>
+      <ul>
+        <li *ngFor="let group of sessionGroups">{{ group.name }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="calendar">
+    <div class="header">
+      <button class="prev-btn" (click)="goToPreviousMonth()">&lt;</button>
+      <span class="month">{{ currentMonth }}</span>
+      <span class="year">&ThinSpace;{{ currentYear }}</span>
+      <button class="next-btn" (click)="goToNextMonth()">&gt;</button>
+    </div>
+
+    <div class="days-names">
+      <div class="day-name" *ngFor="let name of dayNames">{{ name }}</div>
+    </div>
+    <div class="days">
+      <div *ngFor="let day of daysOffset; let i = index" class="day"></div>
+      <div
+        *ngFor="let day of daysInMonth"
+        class="day"
+        [class.selected]="day === selectedDay"
+        (click)="selectDay(day)"
+      >
+        <span class="day-number" [class.selected]="day === selectedDay">{{
+          day
+        }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #sessionDialog>
+  <div class="session-dialog">
+    <h3>Select Training</h3>
+    <select [(ngModel)]="selectedTraining">
+      <option *ngFor="let training of trainings" [value]="training.id">
+        {{ training.name }}
+      </option>
+    </select>
+
+    <h3>Session Time</h3>
+    <input type="time" [(ngModel)]="sessionTime" />
+
+    <h3>Duration (hours)</h3>
+    <input type="number" [(ngModel)]="sessionDuration" />
+
+    <button (click)="openGroupsDialog()">Next</button>
+  </div>
+</ng-template>
+
+<!-- Groups Dialog -->
+<ng-template #groupsDialog>
+  <div class="groups-dialog">
+    <h3>Groups for Session</h3>
+    <ul>
+      <li *ngFor="let group of groups">
+        <label>
+          <input
+            type="checkbox"
+            [checked]="isGroupSelected(group)"
+            (change)="selectGroup(group)"
+          />
+          {{ group.name }}
+        </label>
+      </li>
+    </ul>
+    <button (click)="createSession()">Create Session</button>
+    <button (click)="closeGroupsDialog()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #confirmationDialog>
+  <div class="confirmation-dialog">
+    <h3>Confirmation</h3>
+    <p>Are you sure you want to add the session today?</p>
+    <button (click)="confirmAddSessionToday()">Yes</button>
+    <button (click)="cancelAddSessionToday()">No</button>
+  </div>
+</ng-template>

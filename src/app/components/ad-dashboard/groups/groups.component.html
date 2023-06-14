@@ -1,0 +1,145 @@
+<h1>Create Group</h1>
+
+<button (click)="openGroupDialog()" class="button-styling">Create Group</button>
+<hr />
+
+<div class="card-container">
+  <div class="card" *ngFor="let group of groups">
+    <div class="card-header">
+      <h3 class="card-title">#{{ group.name }}</h3>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="card-options-button"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+    <p class="card-date-details">
+      Creation Date: {{ group.creationDate | date }}
+    </p>
+    <p class="card-details">Coach: {{ getCoachName(group.coachId) }}</p>
+
+    <p class="card-details">Members:</p>
+    <p class="card-details">
+      Training: {{ getTrainingName(group.trainingId) }}
+    </p>
+    <div class="card-buttons">
+      <button (click)="openAddUserDialog(group.id)">Add Student</button>
+      <button (click)="removeUserFromGroup(group.id, userIdRemove)">
+        Remove Student
+      </button>
+    </div>
+    <div class="container">
+      <mat-menu #menu="matMenu" class="menu-dropdown" xPosition="before">
+        <button mat-menu-item>
+          <span class="material-icons">visibility</span>
+          <span>Insight</span>
+        </button>
+        <button mat-menu-item>
+          <span class="material-icons">drive_file_rename_outline</span>
+          <span>Rename</span>
+        </button>
+        <button mat-menu-item>
+          <span class="material-icons">play_arrow</span>
+          <span>Records</span>
+        </button>
+        <button mat-menu-item style="color: red">
+          <span class="material-icons">delete_outline</span>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
+<ng-template #groupDialog>
+  <h2 mat-dialog-title>Add Group</h2>
+  <mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Training</mat-label>
+      <mat-select [(ngModel)]="group.trainingId" name="trainingId">
+        <mat-option *ngFor="let training of trainings" [value]="training.id">
+          {{ training.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Coach</mat-label>
+      <mat-select [(ngModel)]="group.coachId" name="coachId">
+        <mat-option *ngFor="let coach of coaches" [value]="coach.id">
+          {{ coach.fullname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="closeGroupDialog()">Cancel</button>
+    <button
+      mat-button
+      [mat-dialog-close]="true"
+      (click)="createGroup()"
+      cdkFocusInitial
+      style="margin-left: 5px"
+    >
+      Create Group
+    </button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #addUserDialog>
+  <h2 mat-dialog-title>Add User to Group</h2>
+  <mat-dialog-content>
+    <table>
+      <thead>
+        <tr>
+          <th>Fullname</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.fullname }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <button (click)="addUserToGroup(group.id, student.id)">
+              Add Student
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="closeAddUserDialog()">Exit</button>
+  </mat-dialog-actions>
+</ng-template>
+<!--<ng-template #addUserDialog>
+  <h2 mat-dialog-title>Add User to Group</h2>
+  <mat-dialog-content>
+    <table>
+      <thead>
+        <tr>
+          <th>Fullname</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.fullname }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <button (click)="addUserToGroup(group.id, student.id)">
+              Add Student
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="closeAddUserDialog()">Exit</button>
+  </mat-dialog-actions>
+</ng-template>-->

@@ -1,0 +1,30 @@
+<div class="container" onclick="">
+  <div class="top"></div>
+  <div class="bottom"></div>
+  <div class="center">
+    <h2>Please Sign In</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input
+        type="text"
+        placeholder="username"
+        formControlName="username"
+        class="form-control"
+      />
+      <input
+        type="password"
+        placeholder="password"
+        formControlName="password"
+        class="form-control"
+      />
+      <button type="submit">Sign In</button>
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="account-container">
+      <p>If you don't have an account</p>
+      <a [routerLink]="['/register']">Register</a>
+    </div>
+  </div>
+</div>

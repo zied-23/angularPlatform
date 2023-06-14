@@ -1,0 +1,10 @@
+<app-adsidnav
+  (onToggleSideNav)="onToggleSideNav($event)"
+  *ngIf="!isLoginPage && !isRegisterPage"
+>
+</app-adsidnav>
+<app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth">
+  <div class="body" [ngClass]="getBodyClass()">
+    <router-outlet></router-outlet>
+  </div>
+</app-body>

@@ -1,0 +1,145 @@
+<h1>coachs List</h1>
+<button (click)="openCoachDialog()" style="margin: 10px; float: inline-end">
+  Create coach
+</button>
+<input
+  type="text"
+  [(ngModel)]="searchQuery"
+  (input)="filterCoachs()"
+  placeholder="Search..."
+  style="width: fit-content"
+/>
+<mat-form-field appearance="fill">
+  <mat-label>Filter Field</mat-label>
+  <mat-select [(ngModel)]="filterField" (selectionChange)="filterCoachs()">
+    <mat-option value="username">Username</mat-option>
+    <mat-option value="email">Email</mat-option>
+    <mat-option value="phone">Phone</mat-option>
+    <mat-option value="fullname">Full Name</mat-option>
+    <mat-option value="status">Status</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<table class="coachs-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Fullname</th>
+      <th>Creation date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let coach of filteredCoachs">
+      <td>
+        <input
+          type="checkbox"
+          [checked]="coach.selected"
+          (change)="toggleCoachSelection(coach)"
+        />
+      </td>
+      <td>{{ coach.username }}</td>
+      <td>{{ coach.email }}</td>
+      <td>{{ coach.phone }}</td>
+      <td>{{ coach.fullname }}</td>
+      <td>{{ coach.joinDate }}</td>
+      <td>
+        <button
+          class="update-button"
+          (click)="coach.editMode = true"
+          *ngIf="!coach.editMode"
+        >
+          Update
+        </button>
+        <button
+          class="confirm-button"
+          (click)="confirmUpdate(coach)"
+          *ngIf="coach.editMode"
+        >
+          Confirm
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #coachDialog>
+  <h2 mat-dialog-title>Add coach</h2>
+  <mat-dialog-content>
+    <form (ngSubmit)="registerCoach()" class="coach-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="coach.username"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="coach.email"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="coach.password"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          [(ngModel)]="coach.phone"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="fullname">Full Name:</label>
+        <input
+          type="text"
+          id="fullname"
+          name="fullname"
+          [(ngModel)]="coach.fullname"
+          required
+          class="form-control"
+        />
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="closeCoachDialog()">Exit</button>
+    <button
+      mat-button
+      (click)="registerCoach()"
+      style="margin-left: auto"
+      cdkFocusInitial
+    >
+      Create coach
+    </button>
+  </mat-dialog-actions>
+</ng-template>

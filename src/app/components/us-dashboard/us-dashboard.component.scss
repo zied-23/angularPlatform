@@ -1,0 +1,28 @@
+.body {
+  width: calc(100% - 5rem);
+  height: 100%;
+  z-index: 0;
+  top: 0;
+  background: #fff;
+  padding-left: 3rem;
+  margin-left: 4rem; /* Add this line */
+}
+
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 21.5625rem;
+}
+
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 4rem;
+}
+
+.body-full-screen {
+  width: calc(100% - 4rem);
+  margin-left: 4rem;
+}
+
+.body-default {
+  margin-left: 4rem; /* Add this class for default state */
+}

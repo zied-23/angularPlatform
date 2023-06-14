@@ -1,0 +1,46 @@
+<div class="sidebar" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" @fadeInOut (click)="toggleCollapsed()">
+      User Image
+    </button>
+    <div class="">
+      <div class="wb-text" *ngIf="collapsed">Welcome back</div>
+      <div class="wb-name" *ngIf="collapsed && username">{{ username }}</div>
+    </div>
+
+    <button
+      class="btn-close"
+      *ngIf="collapsed"
+      (click)="closeSidenav()"
+    ></button>
+  </div>
+
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="[data.routeLink]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <img [src]="data.icon" class="sidenav-link-icon" />
+        <span class="sidenav-link-text" *ngIf="collapsed">{{
+          data.label
+        }}</span>
+        <img
+          src="assets/icons/menu.png"
+          width="22px"
+          class="sidenav-link-menu"
+          *ngIf="collapsed"
+        />
+      </a>
+    </li>
+  </ul>
+
+  <img
+    src="assets/icons/exit.png"
+    (click)="logout()"
+    class="btn-exit"
+    *ngIf="username"
+  />
+</div>

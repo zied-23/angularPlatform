@@ -1,0 +1,176 @@
+<h1>Students List</h1>
+<button (click)="openStudentDialog()" style="margin: 10px; float: inline-end">
+  Create Student
+</button>
+<input
+  type="text"
+  [(ngModel)]="searchQuery"
+  (input)="filterStudents()"
+  placeholder="Search..."
+  style="width: fit-content"
+/>
+<mat-form-field appearance="fill">
+  <mat-label>Filter Field</mat-label>
+  <mat-select [(ngModel)]="filterField" (selectionChange)="filterStudents()">
+    <mat-option value="username">Username</mat-option>
+    <mat-option value="email">Email</mat-option>
+    <mat-option value="phone">Phone</mat-option>
+    <mat-option value="fullname">Full Name</mat-option>
+    <mat-option value="status">Status</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<table class="students-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Fullname</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of filteredStudents">
+      <td>
+        <input
+          type="checkbox"
+          [checked]="student.selected"
+          (change)="toggleStudentSelection(student)"
+        />
+      </td>
+      <td>{{ student.username }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.phone }}</td>
+      <td>{{ student.fullname }}</td>
+      <td>
+        <ng-container *ngIf="!student.editMode">
+          <span
+            [style.color]="getStatusStyle(student.status).color"
+            [style.background-color]="
+              getStatusStyle(student.status)['background-color']
+            "
+          >
+            {{ student.status }}
+          </span>
+        </ng-container>
+
+        <ng-container *ngIf="student.editMode">
+          <select class="status-select" [(ngModel)]="student.status">
+            <option [style.color]="getStatusStyle('PAID').color" value="PAID">
+              PAID
+            </option>
+            <option
+              [style.color]="getStatusStyle('UNPAID').color"
+              value="UNPAID"
+            >
+              UNPAID
+            </option>
+            <option
+              [style.color]="getStatusStyle('PENDING').color"
+              value="PENDING"
+            >
+              PENDING
+            </option>
+          </select>
+        </ng-container>
+      </td>
+      <td>
+        <button
+          class="update-button"
+          (click)="student.editMode = true"
+          *ngIf="!student.editMode"
+        >
+          Update
+        </button>
+        <button
+          class="confirm-button"
+          (click)="confirmUpdate(student)"
+          *ngIf="student.editMode"
+        >
+          Confirm
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #studentDialog>
+  <h2 mat-dialog-title>Add Student</h2>
+  <mat-dialog-content>
+    <form (ngSubmit)="registerStudent()" class="student-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="student.username"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="student.email"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="student.password"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input
+          type="text"
+          id="phone"
+          name="phone"
+          [(ngModel)]="student.phone"
+          required
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="fullname">Full Name:</label>
+        <input
+          type="text"
+          id="fullname"
+          name="fullname"
+          [(ngModel)]="student.fullname"
+          required
+          class="form-control"
+        />
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="closeStudentDialog()">Exit</button>
+    <button
+      mat-button
+      (click)="registerStudent()"
+      style="margin-left: auto"
+      cdkFocusInitial
+    >
+      Create Student
+    </button>
+  </mat-dialog-actions>
+</ng-template>

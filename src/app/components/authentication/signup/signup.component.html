@@ -1,0 +1,64 @@
+<div class="container" onclick="">
+  <div class="top"></div>
+  <div class="bottom"></div>
+  <div class="center">
+    <h2>Register</h2>
+    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+      <input
+        type="text"
+        id="username"
+        placeholder="Username"
+        name="username"
+        ngModel
+        required
+      />
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        name="email"
+        ngModel
+        required
+      />
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        name="password"
+        ngModel
+        required
+      />
+
+      <input
+        type="text"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        placeholder="Phone Number"
+        required
+      />
+
+      <input
+        type="text"
+        id="fullname"
+        placeholder="FullName"
+        name="fullname"
+        ngModel
+        required
+      />
+
+      <select id="role" name="role" ngModel required>
+        <option value="student">Student</option>
+        <option value="coach">Coach</option>
+      </select>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="account-container">
+      <p>Already have an account</p>
+      <a [routerLink]="['/login']">Login</a>
+    </div>
+  </div>
+</div>
