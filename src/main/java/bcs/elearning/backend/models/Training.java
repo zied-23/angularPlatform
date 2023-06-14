@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Training {
     @Id
     private String id;
-    private String formName;
+    //private String formName;
     private String name;
     private String description;
     private String trainingCh;

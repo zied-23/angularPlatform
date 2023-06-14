@@ -142,7 +142,34 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @GetMapping("/students/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable("id") String id) {
+        Optional<User> optionalStudent = userRepository.findById(id);
+        if (optionalStudent.isPresent()) {
+            User student = optionalStudent.get();
+            if (student instanceof Student) {
+                return ResponseEntity.ok((Student) student);
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: User is not a student."));
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/coaches/{id}")
+    public ResponseEntity<?> getCoachById(@PathVariable("id") String id) {
+        Optional<User> optionalCoach = userRepository.findById(id);
+        if (optionalCoach.isPresent()) {
+            User coach = optionalCoach.get();
+            if (coach instanceof Coach) {
+                return ResponseEntity.ok((Coach) coach);
+            } else {
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: User is not a student."));
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
     /*@PutMapping("/students/{id}")
     public ResponseEntity<?> updateStudent(@PathVariable("id") String id,
                                            @Valid @RequestBody UpdateRequest updateRequest) {

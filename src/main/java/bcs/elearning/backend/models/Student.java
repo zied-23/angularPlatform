@@ -3,6 +3,8 @@ package bcs.elearning.backend.models;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+
 @Document(collection = "students")
 public class Student extends User {
 	public enum ProductStatus {
@@ -11,7 +13,8 @@ public class Student extends User {
 	    PAID
 	  }
 	@DBRef
-    private Training product;
+    private String productId;
+
     private ProductStatus  status;
     public Student() {
    
@@ -25,11 +28,12 @@ public class Student extends User {
 	public void setStatus(ProductStatus status) {
 		this.status = status;
 	}
-	public Training getProduct() {
-        return product;
-    }
-	public void setProduct(Training product) {
-        this.product = product;
-    }
+	public String getProductId() {
+		return productId;
+	}
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+	
 
 }
